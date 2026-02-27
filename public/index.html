@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wait for Link - Step 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: sans-serif; text-align: center; padding-top: 50px; }
+        .btn { padding: 15px 30px; background: #0088cc; color: white; border: none; display: none; margin: 20px auto; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2>আপনার ফাইলটি রেডি হচ্ছে (ধাপ: ১/২)</h2>
+    <div id="ad-space"> </div>
+    <p>অপেক্ষা করুন: <span id="timer">10</span> সেকেন্ড</p>
+    
+    <button id="nextBtn" class="btn" onclick="nextPage()">Continue to Next Step</button>
+
+    <script>
+        let count = 10;
+        const urlParams = new URLSearchParams(window.location.search);
+        const vid = urlParams.get('id');
+
+        const itv = setInterval(() => {
+            count--;
+            document.getElementById('timer').innerText = count;
+            if(count <= 0) {
+                clearInterval(itv);
+                document.getElementById('nextBtn').style.display = 'block';
+            }
+        }, 1000);
+
+        function nextPage() {
+            window.location.href = `/final?id=${vid}`;
+        }
+    </script>
+</body>
+</html>
