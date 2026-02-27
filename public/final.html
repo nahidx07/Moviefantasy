@@ -1,110 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Final Step - Get Your File</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            text-align: center;
-            background-color: #f0f2f5;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-        .container {
-            background: #ffffff;
-            padding: 40px 20px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            max-width: 400px;
-            width: 90%;
-        }
-        h2 { color: #28a745; margin-bottom: 20px; }
-        .timer-box {
-            font-size: 40px;
-            font-weight: bold;
-            color: #ff4757;
-            margin: 20px 0;
-        }
-        .ad-placeholder {
-            width: 100%;
-            height: 150px;
-            background: #e9ecef;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #6c757d;
-            font-size: 14px;
-            border: 1px dashed #ced4da;
-            margin-bottom: 20px;
-        }
-        .btn {
-            background-color: #28a745;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            display: none;
-            width: 100%;
-            text-decoration: none;
-            transition: transform 0.2s ease;
-        }
-        .btn:active { transform: scale(0.98); }
-        .info { color: #666; font-size: 14px; margin-top: 10px; }
-    </style>
+    <title>Final Step | MovieFantasy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
+<body class="bg-gray-100 font-sans">
 
-    <div class="container">
-        <h2>ধাপ: ২/২</h2>
-        <p>আপনার ফাইলটি এখন প্রস্তুত!</p>
-        
-        <div class="ad-placeholder">
-            Final Ad Unit (Place Ad Code here)
+    <header class="bg-slate-900 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3">
+            <h1 class="text-2xl font-bold text-yellow-500 text-center uppercase tracking-widest">Movie Fantasy</h1>
         </div>
+    </header>
 
-        <div id="timer" class="timer-box">10</div>
+    <main class="container mx-auto px-4 py-12 flex flex-col items-center">
+        <div class="max-w-xl w-full bg-white p-10 rounded-3xl shadow-xl border border-gray-200 text-center">
+            <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i class="fas fa-check-circle text-4xl"></i>
+            </div>
+            
+            <h2 class="text-2xl font-bold text-slate-800 mb-2">ফাইলটি প্রস্তুত!</h2>
+            <p class="text-gray-500 mb-8">সবচেয়ে দ্রুত এবং নিরাপদ সার্ভারে আপনার ফাইল পাঠানো হয়েছে।</p>
 
-        <button id="getBtn" class="btn" onclick="goToBot()">ফাইলটি টেলিগ্রামে নিন (Get File)</button>
-        <p class="info" id="infoText">টাইমার শেষ হওয়া পর্যন্ত অপেক্ষা করুন</p>
-    </div>
+            <div id="timer" class="text-4xl font-mono font-bold text-red-500 mb-8">10</div>
+
+            <button id="getBtn" onclick="goToBot()" class="hidden w-full bg-green-600 hover:bg-green-700 text-white font-black py-4 rounded-xl text-xl shadow-xl transform transition hover:scale-105 active:scale-95">
+                <i class="fab fa-telegram mr-2"></i> ফাইলটি সংগ্রহ করুন
+            </button>
+
+            <div class="mt-10 p-6 bg-gray-50 rounded-xl border-2 border-dashed border-gray-300">
+                <p class="text-xs text-gray-400 uppercase tracking-widest mb-2">Sponsored Content</p>
+                <div class="h-32 flex items-center justify-center text-gray-300">
+                    AD UNIT HERE
+                </div>
+            </div>
+        </div>
+        
+        <p class="mt-8 text-gray-400 text-xs text-center">© 2026 MovieFantasy Portal. All rights reserved.</p>
+    </main>
 
     <script>
-        let timeLeft = 10;
-        const timerElement = document.getElementById('timer');
-        const getBtn = document.getElementById('getBtn');
-
-        // URL থেকে ফাইল আইডি (vid) সংগ্রহ করা
+        let count = 10;
         const urlParams = new URLSearchParams(window.location.search);
         const vid = urlParams.get('id');
 
-        const countdown = setInterval(() => {
-            timeLeft--;
-            timerElement.innerText = timeLeft;
-
-            if (timeLeft <= 0) {
-                clearInterval(countdown);
-                timerElement.style.display = 'none';
-                getBtn.style.display = 'block';
-                document.getElementById('infoText').innerText = "নিচের বাটনে ক্লিক করুন";
+        const timer = setInterval(() => {
+            count--;
+            document.getElementById('timer').innerText = count;
+            if(count <= 0) {
+                clearInterval(timer);
+                document.getElementById('timer').classList.add('hidden');
+                document.getElementById('getBtn').classList.remove('hidden');
             }
         }, 1000);
 
         function goToBot() {
-            if (vid) {
-                // সরাসরি আপনার বট @MovieFantasy_bot এ নিয়ে যাবে
-                window.location.href = `https://t.me/MovieFantasy_bot?start=${vid}`;
-            } else {
-                alert("এরর: ফাইল আইডি পাওয়া যায়নি!");
-            }
+            window.location.href = `https://t.me/MovieFantasy_bot?start=${vid}`;
         }
     </script>
 </body>
