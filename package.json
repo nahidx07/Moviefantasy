@@ -5,7 +5,8 @@
   "dependencies": {
     "telegraf": "^4.12.0",
     "firebase-admin": "^11.5.0",
+    "@google-cloud/firestore": "^6.0.0",
+    "protobufjs": "^7.2.4",
     "express": "^4.18.2"
   }
 }
-
