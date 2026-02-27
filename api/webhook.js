@@ -17,7 +17,7 @@ bot.start(async (ctx) => {
         const member = await ctx.telegram.getChatMember(process.env.CHANNEL_ID, ctx.from.id);
         if (!['member', 'administrator', 'creator'].includes(member.status)) {
             return ctx.reply("⚠️ ভিডিওটি পেতে আগে আমাদের চ্যানেলে জয়েন করুন!", Markup.inlineKeyboard([
-                [Markup.button.url("Join Channel", `https://t.me/YourChannelUsername`)替換],
+                [Markup.button.url("Join Channel", `https://t.me/+EGqcACu3kl0wYzA1`)替換],
                 [Markup.button.url("Try Again", `https://t.me/${ctx.botInfo.username}?start=${payload}`)]
             ]));
         }
