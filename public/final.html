@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Final Step</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: sans-serif; text-align: center; padding-top: 50px; }
+        .btn { padding: 15px 30px; background: #28a745; color: white; border: none; display: none; margin: 20px auto; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2>আপনার ফাইলটি এখন প্রস্তুত (ধাপ: ২/২)</h2>
+    <div id="ad-space"> </div>
+    <p>অপেক্ষা করুন: <span id="timer">10</span> সেকেন্ড</p>
+    
+    <button id="getBtn" class="btn" onclick="goToBot()">Get File on Telegram</button>
+
+    <script>
+        let count = 10;
+        const urlParams = new URLSearchParams(window.location.search);
+        const vid = urlParams.get('id');
+
+        const itv = setInterval(() => {
+            count--;
+            document.getElementById('timer').innerText = count;
+            if(count <= 0) {
+                clearInterval(itv);
+                document.getElementById('getBtn').style.display = 'block';
+            }
+        }, 1000);
+
+        function goToBot() {
+            // YourBotUsername টা পাল্টে নিন
+            window.location.href = `https://t.me/YourBotUsername?start=${vid}`;
+        }
+    </script>
+</body>
+</html>
